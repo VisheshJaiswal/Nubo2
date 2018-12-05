@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="BIC Architecture Management">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+    <title>Web Socks: Bot</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="text">
+        <br>
+        <input type="submit" value="Submit" @click="submit">
+        <br>
+        {{text}}
+    </div>
+    <!-- <script src="/dist/assets/js/app.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script>
+        var socket = io()
+        let app = new Vue({
+            el: '#app',
+            data: {
+                text: ''
+            },
+            created(){
+                socket.emit('here','tryme')
+                // socket.on('DDDD',(data) => {
+                //     console.log('server bc', data)
+                // })
+            },
+            methods: {
+                submit() {
+                    socket.emit('publish', this.text)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
