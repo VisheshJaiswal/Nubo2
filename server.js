@@ -1,9 +1,9 @@
-var app = require('express')();
-var http = require('http').Server(app);
+var app = require('express')()
+var http = require('http').Server(app)
 const fs = require('fs')
 const path = require('path')
 const io = require('socket.io')(http)
-
+const port = process.env.PORT || 3000
 const indexHTML = (() => {
     return fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf-8')
   })()
@@ -25,8 +25,8 @@ app.get('/say', function(req, res){
 	res.end()
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(port, function(){
+  console.log('listening on *:', port);
 });
 
 io.on('connection', (socket) => {
