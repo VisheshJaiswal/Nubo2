@@ -17,24 +17,30 @@
         <br>
         <input type="submit" value="Submit" @click="submit">
         <br>
-        {{text}}
+        {{answer}}
     </div>
     <!-- <script src="/dist/assets/js/app.js"></script> -->
-    <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script>
-        var socket = io()
         let app = new Vue({
             el: '#app',
             data: {
-                text: ''
+                text: '',
+                answer: ''
             },
-            created(){
-                socket.emit('here','tryme')
-            },
+            created() {},
             methods: {
                 submit() {
-                    socket.emit('publish', this.text)
+                    fetch(`/answer?q=${this.text}`)
+                        .then(
+                            response => response.text() // .json(), etc.
+                            // same as function(response) {return response.text();}
+                        ).then(
+                            html => {
+                                console.log(html)
+                                this.answer = html
+                            }
+                        );
                 }
             }
         })

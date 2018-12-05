@@ -7,12 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="BIC Architecture Management">
     <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
-    <title>Web Socks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"/>
+    <title>Nubo</title>
 </head>
 
 <body>
     <div id="app">
-        <h1>{{answer}}</h1>
+        <section class="hero is-primary is-fullheight">
+            <div class="hero-body">
+              <div class="container has-text-centered">
+                <h1 class="title is-1">
+                  {{answer}}
+                </h1>
+                <h2 class="subtitle">
+                </h2>
+              </div>
+            </div>
+          </section>
     </div>
     <!-- <script src="/dist/assets/js/app.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
@@ -22,7 +33,11 @@
         let app = new Vue({
             el: '#app',
             data: {
-                answer: 'thinking...'
+                answer: 'say something...'
+            },
+            computed: {
+            },
+            watch: {
             },
             created(){
                 socket.on('listen',(data) => {

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cleverbot.io": "^1.0.4",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "nodemon": "^1.18.7",
