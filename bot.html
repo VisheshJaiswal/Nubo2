@@ -13,11 +13,18 @@
 
 <body>
     <div id="app">
-        <input type="text" v-model="text" @keyup.enter="submit">
-        <br>
-        <input type="submit" value="Submit" @click="submit">
-        <br>
-        {{oldtext}}
+        <section class="hero is-primary is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                <br>
+                <input class="input" type="text" v-model="text" @keyup.enter="submit" @focus="spin">
+                <br>
+                <input class="button" type="submit" value="Submit" @click="submit">
+                <br>
+                <h2 class="title is-2 has-text-grey-dark">{{oldtext}}</h2>
+                </div>
+            </div>
+        </section>
     </div>
     <!-- <script src="/dist/assets/js/app.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
@@ -28,15 +35,18 @@
             el: '#app',
             data: {
                 text: '',
-                oldtext:''
+                oldtext: ''
             },
-            created(){
-            },
+            created() {},
             methods: {
                 submit() {
                     socket.emit('publish', this.text)
                     this.oldtext = this.text
                     this.text = ''
+                },
+                spin() {
+                    socket.emit('spin')
+                    console.log('spin!')
                 }
             }
         })

@@ -56,12 +56,13 @@ http.listen(port, function(){
 });
 
 io.on('connection', (socket) => {
-	console.log('connected')
 	socket.on('disconnect', () => {
-		console.log('disconnected')
+		socket.broadcast.emit('stop')
 	})
 	socket.on('publish', (data) => {
-		console.log(data)
 		socket.broadcast.emit('listen', (data))
+	})
+	socket.on('spin', () => {
+		socket.broadcast.emit('spin')
 	})
 })
