@@ -16,11 +16,12 @@
         <section class="hero is-primary is-fullheight">
             <div class="hero-body">
               <div class="container has-text-centered">
-                <h1 class="title is-1">
+                <h1 v-if="answer" class="title is-1">
                   {{answer}}
                 </h1>
-                <h2 class="subtitle">
-                </h2>
+                <!-- <h2 class="subtitle">
+                </h2> -->
+                <img v-if="image" :src="image" class="img-window">
               </div>
             </div>
           </section>
@@ -33,7 +34,8 @@
         let app = new Vue({
             el: '#app',
             data: {
-                answer: 'say something...'
+                answer: 'say something...',
+                image:''
             },
             computed: {
             },
@@ -41,11 +43,18 @@
             },
             created(){
                 socket.on('listen',(data) => {
+                    this.image = false
                     this.answer = data
+                })
+                socket.on('pic',(data) => {
+                    this.answer = false
+                    this.image = data
                 })
             }
         })
     </script>
+    <style>
+    </style>
 </body>
 
 </html>

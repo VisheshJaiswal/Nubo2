@@ -34,14 +34,20 @@ app.get('/bot', function(req, res){
 });
 
 app.get('/answer', function(req, res){
-	bot.ask(req.query.q, function (err, response) {
+	bot.ask(req.query.v, function (err, response) {
 		res.send(response)
-		console.log(req.query.q + ' ' + response);
+		console.log(req.query.v + ' ' + response);
 	});
 });
 
 app.get('/say', function(req, res){
 	io.emit('listen', req.query.v)
+	res.end()
+});
+
+app.get('/pic', function(req, res){
+	console.log(req.query.v)
+	io.emit('pic', req.query.v)
 	res.end()
 });
 

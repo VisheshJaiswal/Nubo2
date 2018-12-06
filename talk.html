@@ -13,7 +13,7 @@
 
 <body>
     <div id="app">
-        <input type="text" v-model="text">
+        <input type="text" v-model="text" @keyup.enter="submit">
         <br>
         <input type="submit" value="Submit" @click="submit">
         <br>
@@ -31,7 +31,7 @@
             created() {},
             methods: {
                 submit() {
-                    fetch(`/answer?q=${this.text}`)
+                    fetch(`/answer?v=${this.text}`)
                         .then(
                             response => response.text() // .json(), etc.
                             // same as function(response) {return response.text();}

@@ -13,11 +13,11 @@
 
 <body>
     <div id="app">
-        <input type="text" v-model="text">
+        <input type="text" v-model="text" @keyup.enter="submit">
         <br>
         <input type="submit" value="Submit" @click="submit">
         <br>
-        {{text}}
+        {{oldtext}}
     </div>
     <!-- <script src="/dist/assets/js/app.js"></script> -->
     <script src="/socket.io/socket.io.js"></script>
@@ -27,14 +27,16 @@
         let app = new Vue({
             el: '#app',
             data: {
-                text: ''
+                text: '',
+                oldtext:''
             },
             created(){
-                socket.emit('here','tryme')
             },
             methods: {
                 submit() {
                     socket.emit('publish', this.text)
+                    this.oldtext = this.text
+                    this.text = ''
                 }
             }
         })
