@@ -42,6 +42,7 @@ app.get('/answer', function(req, res){
 
 app.get('/say', function(req, res){
 	io.emit('listen', req.query.v)
+	console.log(req.query.v);
 	res.end()
 });
 
